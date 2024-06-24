@@ -1,21 +1,23 @@
 "use client";
 
 import { useState } from 'react';
+import { v4 as uuidv4 } from 'uuid';
 
-export default function NewItem() {
+export default function NewItem({ onAddItem }) {
     const [name, setName] = useState('');
     const [quantity, setQuantity] = useState(1);
     const [category, setCategory] = useState('produce');
 
+
     const handleSubmit = (event) => {
         event.preventDefault();
-        const item = { name, quantity, category };
-        console.log(item);
-        alert(`Item: ${name}, Quantity: ${quantity}, Category: ${category}`);
+        const newItem = { id: uuidv4(), name, quantity, category };
+        onAddItem(newItem);
         setName('');
         setQuantity(1);
         setCategory('produce');
     };
+    
 
     return (
         <dev className = " flex justify-center">
